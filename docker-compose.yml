@@ -12,6 +12,7 @@ services:
         volumes:
           - ./postgresql:/var/lib/postgresql
     apache_img_1:
+        image: php:7-apache
         container_name: apache1
         build: ./apache
         volumes:
@@ -19,6 +20,7 @@ services:
         depends_on:
           - db
     apache_img_2:
+        image: php:7-apache
         container_name: apache2
         build: ./apache
         volumes:
@@ -26,6 +28,7 @@ services:
         depends_on:
           - db
     haproxy_img:
+        image: haproxy:latest
         build: ./haproxy
         ports:
             - 80:80
@@ -38,3 +41,4 @@ services:
         depends_on:
           - apache_img_1
           - apache_img_2
+          
