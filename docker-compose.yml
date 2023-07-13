@@ -14,7 +14,9 @@ services:
     apache_img_1:
         image: php:7-apache
         container_name: apache1
-        build: ./apache
+        build: 
+          context: ./Apache
+          dockerfile: Dockerfile
         volumes:
           - ./www:/var/www/html
         depends_on:
@@ -22,14 +24,18 @@ services:
     apache_img_2:
         image: php:7-apache
         container_name: apache2
-        build: ./apache
+        build: 
+          context: ./Apache
+          dockerfile: Dockerfile
         volumes:
           - ./www:/var/www/html
         depends_on:
           - db
     haproxy_img:
         image: haproxy:latest
-        build: ./haproxy
+        build: 
+          context: ./HAProxy
+          dockerfile: Dockerfile
         ports:
             - 80:80
         expose:
@@ -41,4 +47,3 @@ services:
         depends_on:
           - apache_img_1
           - apache_img_2
-          
